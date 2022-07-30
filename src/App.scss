@@ -1,3 +1,35 @@
 .starter {
   font-size: 18px;
+  width: 100wh;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.title {
+  position: absolute;
+  top: 10px;
+  margin: 0 auto;
+}
+
+.button {
+  position: absolute;
+  top: 70px;
+  margin: 0 auto;
+}
+
+.card {
+  width: 100px;
+  height: 50px;
+  border-radius: 10px;
+  border: 2px solid black;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: grab;
+  background-color: red;
+
 }
