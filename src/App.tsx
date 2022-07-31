@@ -5,13 +5,34 @@ type Card = {
   id: string;
   order: string;
   name: string;
+  color: string;
 };
 
 const someCards: Card[] = [
-  { id: '1', order: '1', name: 'card #1' },
-  { id: '3', order: '3', name: 'card #3' },
-  { id: '4', order: '4', name: 'card #4' },
-  { id: '2', order: '2', name: 'card #2' },
+  {
+    id: '1',
+    order: '1',
+    name: 'card #1',
+    color: '#e71f00',
+  },
+  {
+    id: '3',
+    order: '3',
+    name: 'card #3',
+    color: '#aeb937',
+  },
+  {
+    id: '4',
+    order: '4',
+    name: 'card #4',
+    color: '#94c4d4',
+  },
+  {
+    id: '2',
+    order: '2',
+    name: 'card #2',
+    color: '#6e937d',
+  },
 ];
 
 export const App: React.FC = () => {
@@ -20,6 +41,7 @@ export const App: React.FC = () => {
     id: '',
     order: '',
     name: '',
+    color: '',
   });
 
   const basicOrder = () => setCardList(someCards);
@@ -31,27 +53,27 @@ export const App: React.FC = () => {
     setCurrentCard(card);
   };
 
-  const dragLeaveHandler = (event: any) => {
+  const dragLeaveHandler = (event: any, card: Card) => {
     // eslint-disable-next-line no-console
-    console.log('see this', event);
+    console.log('see this', event, card);
 
     // eslint-disable-next-line no-param-reassign
-    event.target.style.backgroundColor = 'red';
+    event.target.style.backgroundColor = card.color;
   };
 
   const dragEndHandler = (event: any) => {
     // eslint-disable-next-line no-console
-    console.log(event);
+    // console.log(event);
 
     // eslint-disable-next-line no-param-reassign
-    // event.target.style.background = 'red';
+    event.target.style.background = currentCard.color;
   };
 
   const dragOverHandler = (event: any) => {
     event.preventDefault();
 
     // eslint-disable-next-line no-console
-    console.log(event);
+    // console.log(event);
 
     // eslint-disable-next-line no-param-reassign
     event.target.style.background = 'lightgrey';
@@ -61,7 +83,7 @@ export const App: React.FC = () => {
     event.preventDefault();
 
     // eslint-disable-next-line no-console
-    console.log(card, event);
+    // console.log(card, event);
 
     setCardList(cardList.map(c => {
       if (c.id === card.id) {
@@ -76,7 +98,7 @@ export const App: React.FC = () => {
     }));
 
     // eslint-disable-next-line no-param-reassign
-    event.target.style.background = 'red';
+    event.target.style.background = currentCard.color;
   };
 
   const sortCards = (c1: Card, c2: Card) => {
@@ -86,18 +108,21 @@ export const App: React.FC = () => {
   return (
     <div className="starter">
       <h1 className="title">drug and drop</h1>
-      {cardList.sort(sortCards).map((card: { id: string; order: string; name: string; }) => (
+      {cardList.sort(sortCards).map((card: Card) => (
         <div
           key={card.id}
           className="card"
           draggable="true"
           onDragStart={(event) => dragStartHandler(event, card)}
-          onDragLeave={(event) => dragLeaveHandler(event)}
+          onDragLeave={(event) => dragLeaveHandler(event, card)}
           onDragEnd={(event) => dragEndHandler(event)}
           onDragOver={(event) => dragOverHandler(event)}
           onDrop={(event) => dropHandler(event, card)}
+          style={{
+            backgroundColor: card.color,
+          }}
         >
-          {card.name}
+          {card.name + card.color}
         </div>
       ))}
       <button
