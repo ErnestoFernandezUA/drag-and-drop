@@ -48,14 +48,14 @@ export const App: React.FC = () => {
 
   const dragStartHandler = (event: React.DragEvent<HTMLDivElement>, card: Card) => {
     // eslint-disable-next-line no-console
-    // console.log(event, card);
+    console.log('dragStartHandler', event, card);
 
     setCurrentCard(card);
   };
 
   const dragLeaveHandler = (event: any, card: Card) => {
     // eslint-disable-next-line no-console
-    console.log('see this', event, card);
+    console.log('dragLeaveHandler', event, card);
 
     // eslint-disable-next-line no-param-reassign
     event.target.style.backgroundColor = card.color;
@@ -63,7 +63,7 @@ export const App: React.FC = () => {
 
   const dragEndHandler = (event: any) => {
     // eslint-disable-next-line no-console
-    // console.log(event);
+    console.log('dragEndHandler', event);
 
     // eslint-disable-next-line no-param-reassign
     event.target.style.background = currentCard.color;
@@ -73,7 +73,7 @@ export const App: React.FC = () => {
     event.preventDefault();
 
     // eslint-disable-next-line no-console
-    // console.log(event);
+    // console.log('dragOverHandler', event.target.style.background);
 
     // eslint-disable-next-line no-param-reassign
     event.target.style.background = 'lightgrey';
@@ -122,7 +122,9 @@ export const App: React.FC = () => {
             backgroundColor: card.color,
           }}
         >
-          {card.name + card.color}
+          {card.name}
+          <br />
+          {card.color}
         </div>
       ))}
       <button
